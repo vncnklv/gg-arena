@@ -1,7 +1,6 @@
 html {
     box-sizing: border-box;
-
-    font: 16px/1 "Inter", sans-serif;
+    font: 16px/1 "Poppins", sans-serif;
 }
 
 *,
@@ -13,5 +12,5 @@ html {
 }
 
 a {
-    font: inherit;
+    text-decoration: none;
 }
