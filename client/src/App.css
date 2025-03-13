@@ -6,3 +6,8 @@ main {
 * {
     color: #F8F9FA;
 }
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
