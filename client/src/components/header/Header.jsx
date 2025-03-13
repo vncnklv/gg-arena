@@ -27,11 +27,11 @@ function Header() {
             </nav>
             <section>
                 <ul className={styles['auth-links']}>
-                    <li className={`${styles['auth-link']} ${styles['auth-login']}`}>
-                        <Link to='/login'>Login</Link>
+                    <li className={styles['auth-login']}>
+                        <Link to='/login' className={styles['auth-link']}>Login</Link>
                     </li>
-                    <li className={`${styles['auth-link']} ${styles['auth-register']}`}>
-                        <Link to='/register'>Register</Link>
+                    <li className={styles['auth-register']}>
+                        <Link to='/register' className={styles['auth-link']}>Register</Link>
                     </li>
                 </ul>
             </section>
