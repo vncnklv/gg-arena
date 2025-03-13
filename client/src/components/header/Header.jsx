@@ -1,26 +1,38 @@
-import styles from './Header.module.css';
+import { Link } from 'react-router'
+
+import styles from './Header.module.css'
 import logo from '/logo.png'
 
 function Header() {
     return (
         <header className={styles.header}>
-            <a href="#">
+            <Link to='/'>
                 <section className={styles.logo}>
                     <img src={logo} alt="GG Arena Logo" className={styles['logo-image']} />
                     <span className={styles['logo-text']}>Arena</span>
                 </section>
-            </a>
+            </Link>
             <nav>
                 <ul className={styles['navigation-links']}>
-                    <li className={styles['navigation-link']}><a href="#">Tournaments</a></li>
-                    <li className={styles['navigation-link']}><a href="#">Leaderboard</a></li>
-                    <li className={styles['navigation-link']}><a href="#">Games</a></li>
+                    <li className={styles['navigation-link']}>
+                        <Link to='/tournaments'>Tournaments</Link>
+                    </li>
+                    <li className={styles['navigation-link']}>
+                        <Link to='/leaderboard'>Leaderboard</Link>
+                    </li>
+                    <li className={styles['navigation-link']}>
+                        <Link to='/games'>Games</Link>
+                    </li>
                 </ul>
             </nav>
             <section>
                 <ul className={styles['auth-links']}>
-                    <li className={`${styles['auth-link']} ${styles['auth-login']}`}><a href="#">Login</a></li>
-                    <li className={`${styles['auth-link']} ${styles['auth-register']}`}><a href="#">Register</a></li>
+                    <li className={`${styles['auth-link']} ${styles['auth-login']}`}>
+                        <Link to='/login'>Login</Link>
+                    </li>
+                    <li className={`${styles['auth-link']} ${styles['auth-register']}`}>
+                        <Link to='/register'>Register</Link>
+                    </li>
                 </ul>
             </section>
         </header>
