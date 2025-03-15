@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
     position: absolute;
     min-width: 400px;
 
@@ -12,7 +12,17 @@
     border-radius: 3px;
 }
 
-.login-form {
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    gap: 1em;
+}
+
+.input-set {
     display: flex;
     flex-direction: column;
 }
@@ -46,12 +56,12 @@ input[type="submit"].submit-button {
     font-size: 0.8em;
 }
 
-.register-redirect {
+.login-redirect {
     font-size: 0.85em;
     text-align: center;
     margin-top: 2em;
 }
 
-.register-redirect a {
+.login-redirect a {
     color: #007BFF;
 }
