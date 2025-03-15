@@ -1,6 +1,9 @@
 main {
     background-color: #333;
     min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 * {
@@ -8,6 +11,6 @@ main {
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
+    align-self: center;
+    flex: 1;
 }

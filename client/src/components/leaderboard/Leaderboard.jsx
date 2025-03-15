@@ -9,7 +9,7 @@ function Leaderboard() {
                 <thead className={styles['table-header']}>
                     <tr className={styles['table-row']}>
                         <th></th>
-                        <th>Player</th>
+                        <th className={styles['player-name-cell']}>Player</th>
                         <th>Last played game</th>
                         <th>Wins</th>
                         <th>Trophies</th>
@@ -22,7 +22,7 @@ function Leaderboard() {
                             <p>Player Player</p>
                             <p>@player</p>
                         </td>
-                        <td>Counter Strike</td>
+                        <td className={styles['game-name-cell']}>Counter Strike aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
                         <td>25</td>
                         <td className={styles['trophies-cell']}>
                             <p>100</p>

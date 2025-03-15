@@ -10,11 +10,13 @@ import Home from './components/home/Home'
 import Profile from './components/profile/Profile'
 
 import './App.css'
+import Footer from './components/footer/Footer'
 
 function App() {
     return (
         <main>
             <Header />
+
             <Routes>
                 <Route index element={<Home />} />
                 <Route path='/tournaments' element={<Tournaments />} />
@@ -25,6 +27,8 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
             </Routes>
+
+            <Footer />
         </main>
     )
 }
