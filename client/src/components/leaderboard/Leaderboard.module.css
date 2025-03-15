@@ -51,12 +51,18 @@
 
 .player-name-cell {
     text-align: left;
+    max-width: 25ch;
+    min-width: 25ch;
+}
+
+.no-text-overflow {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .game-name-cell {
     max-width: 40ch;
     min-width: 40ch;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    text-align: left;
 }
