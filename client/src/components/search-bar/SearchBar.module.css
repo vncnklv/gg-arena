@@ -1,0 +1,37 @@
+.search-bar-container {
+    border: 1px solid rgb(0, 125, 255, 0.2);
+    background-color: rgb(0, 125, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.search-form {
+    display: flex;
+    gap: 1em;
+}
+
+.search-bar {
+    flex: 1;
+    padding: 0.3em;
+}
+
+input[type="submit"].search-btn {
+    all: unset;
+    text-align: center;
+    flex-basis: 10em;
+    background-color: #007BFF;
+    border-radius: 3px;
+}
+
+input[type="submit"].search-btn:hover {
+    cursor: pointer;
+}
+
+.search-bar {
+    background-color: transparent;
+    border: 2px solid #007BFF;
+    padding: 0.5em;
+    border-radius: 3px;
+}

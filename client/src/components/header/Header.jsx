@@ -14,9 +14,9 @@ function Header() {
             </Link>
             <nav>
                 <ul className={styles['navigation-links']}>
-                    <li className={styles['navigation-link']}>
+                    {/* <li className={styles['navigation-link']}>
                         <Link to='/tournaments'>Tournaments</Link>
-                    </li>
+                    </li> */}
                     <li className={styles['navigation-link']}>
                         <Link to='/leaderboard'>Leaderboard</Link>
                     </li>
