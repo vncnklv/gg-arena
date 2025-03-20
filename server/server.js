@@ -1350,7 +1350,7 @@
             "fe7000b7-85e6-44db-9294-9375e4be521a":{
                 _id: "fe7000b7-85e6-44db-9294-9375e4be521a",
                 name: "Counter Strike 2",
-                imageUrl: "https://gaming-cdn.com/images/products/14565/orig/starcraft-3-pc-game-cover.jpg"
+                imageUrl: "https://upload.wikimedia.org/wikipedia/en/f/f2/CS2_Cover_Art.jpg"
             },
             "b787f390-50b1-444f-87f7-c1c9b8084062":{
                 _id: "b787f390-50b1-444f-87f7-c1c9b8084062",
