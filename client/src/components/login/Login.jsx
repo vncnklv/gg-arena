@@ -1,6 +1,8 @@
 import { Link } from 'react-router'
 
 import styles from './Login.module.css'
+import { useAuth } from '../../providers/UserProvider';
+import { useEffect } from 'react';
 
 function Login() {
     return (

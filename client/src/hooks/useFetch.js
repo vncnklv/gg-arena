@@ -5,6 +5,7 @@ export default function useFetch(path, initialState, options = {}) {
     const [data, setData] = useState(initialState);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [fetchTrigger, setFetchTrigger] = useState(0);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -17,8 +18,8 @@ export default function useFetch(path, initialState, options = {}) {
             try {
                 const json = await makeRequest(path, { ...options, signal });
                 setData(json);
-            } catch (err) {
-                if (err.name !== "AbortError") {
+            } catch (err) {         
+                if (!signal.aborted) {
                     setError(err.message);
                 }
             } finally {
@@ -27,8 +28,12 @@ export default function useFetch(path, initialState, options = {}) {
         }
 
         fetchData();
-        return () => controller.abort();
-    }, [path]);
+        return () => controller.abort('aborted');
+    }, [path, fetchTrigger]);
 
-    return [data, isLoading, error];
+    const refetch = () => {
+        setFetchTrigger(prev => prev + 1);
+    };
+
+    return [data, isLoading, error, refetch];
 }

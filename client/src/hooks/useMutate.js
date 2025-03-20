@@ -12,6 +12,7 @@ export default function useMutate(path, method, options = {}) {
 
         try {
             const json = await makeRequest(path, options, method, body);
+            setError(null);
             setData(json);
             return json;
         } catch (err) {
