@@ -39,6 +39,10 @@ input[type="submit"].submit-button {
     /* color: #333; */
 }
 
+input[type="submit"].submit-button:disabled {
+    cursor: not-allowed;
+}
+
 .error-message {
     color: #DC3545;
     text-align: center;
