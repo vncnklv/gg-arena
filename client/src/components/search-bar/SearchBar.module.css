@@ -5,11 +5,14 @@
     overflow: hidden;
     padding: 1em;
     margin-bottom: 1em;
+    display: flex;
+    gap: 1em
 }
 
 .search-form {
     display: flex;
     gap: 1em;
+    flex: 1;
 }
 
 .search-bar {
@@ -19,10 +22,17 @@
 
 input[type="submit"].search-btn {
     all: unset;
+}
+
+input[type="submit"].search-btn,
+.add-btn {
+
     text-align: center;
     flex-basis: 10em;
     background-color: #007BFF;
     border-radius: 3px;
+    margin: auto 0;
+    padding: 0.7em 0;
 }
 
 input[type="submit"].search-btn:hover {
