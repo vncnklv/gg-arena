@@ -21,8 +21,14 @@ export default function usePersistedState(stateKey, initalState) {
         setState(data);
     };
 
+    const clearState = () => {
+        localStorage.removeItem(stateKey);
+        setState(initalState);
+    }
+
     return [
         state,
         setPersistedState,
+        clearState
     ]
 }

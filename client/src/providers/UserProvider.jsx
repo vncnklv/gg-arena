@@ -18,11 +18,12 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-    const [user, userIsLoading, userError, refetchUser] = useFetch('/users/me', undefined);
+    const [user, userIsLoading, userError, refetchUser, clearUser] = useFetch('/users/me', undefined);
     const [isAuth, setIsAuth] = useState(false);
-    const [token, setToken] = usePersistedState('token', '');
+    const [token, setToken, clearToken] = usePersistedState('token', '');
     const [loginRequest, loginData, loginIsLoading, loginError] = useMutate('/users/login', "POST");
     const [registerRequest, registerData, registerIsLoading, registerError] = useMutate('/users/register', "POST");
+    const [logoutRequest] = useMutate('/users/logout', "GET");
     const [isLoading, setIsLoading] = useState();
     const navigate = useNavigate();
 
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         if(userError == "Invalid access token")
         {
-            setToken("");
+            clearToken();
             navigate("/login");
         }
     }, [userError])
@@ -73,7 +74,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logout = async () => {
-
+        await logoutRequest();
+        clearToken();
+        clearUser();
     }
 
     return (

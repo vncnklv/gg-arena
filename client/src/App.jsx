@@ -8,9 +8,10 @@ import Register from './components/register/Register'
 import Games from './components/games/Games'
 import Home from './components/home/Home'
 import Profile from './components/profile/Profile'
+import Logout from './components/logout/Logout'
+import Footer from './components/footer/Footer'
 
 import './App.css'
-import Footer from './components/footer/Footer'
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
 
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/logout' element={<Logout />} />
             </Routes>
 
             <Footer />

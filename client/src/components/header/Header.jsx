@@ -34,7 +34,7 @@ function Header() {
             <section>
                 {isAuth
                     ? (<ul className={styles['auth-links']}>
-                        <li>{user.email}</li>
+                        <li>{user?.email}</li>
                         <li className={styles['auth-login']}>
                             <Link to='/user-profile' className={styles['auth-link']}>Profile</Link>
                         </li>

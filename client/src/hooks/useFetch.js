@@ -35,5 +35,9 @@ export default function useFetch(path, initialState, options = {}) {
         setFetchTrigger(prev => prev + 1);
     };
 
-    return [data, isLoading, error, refetch];
+    const clear = () => {
+        setData(initialState);
+    }
+
+    return [data, isLoading, error, refetch, clear];
 }
