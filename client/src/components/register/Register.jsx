@@ -9,7 +9,6 @@ function Register() {
         email: '',
         password: '',
         username: '',
-        password: '',
         confirmPassword: '',
         firstName: '',
         lastName: '',
