@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import usePersistedState from '../hooks/usePersistedState';
 import useFetch from '../hooks/useFetch';
 import useMutate from '../hooks/useMutate';
+import { useNavigate } from 'react-router';
 
 const Context = createContext({
     isAuth: false,
@@ -23,6 +24,7 @@ export const AuthProvider = ({ children }) => {
     const [loginRequest, loginData, loginIsLoading, loginError] = useMutate('/users/login', "POST");
     const [registerRequest, registerData, registerIsLoading, registerError] = useMutate('/users/register', "POST");
     const [isLoading, setIsLoading] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(userIsLoading || loginIsLoading || registerIsLoading);
@@ -31,6 +33,14 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         setIsAuth(!!user);
     }, [user]);
+
+    useEffect(() => {
+        if(userError == "Invalid access token")
+        {
+            setToken("");
+            navigate("/login");
+        }
+    }, [userError])
 
     const login = async (email, password) => {
         if (!email || !password) {

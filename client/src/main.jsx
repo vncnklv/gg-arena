@@ -9,10 +9,10 @@ import { AuthProvider } from './providers/UserProvider'
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <AuthProvider>
-            <BrowserRouter basename='/gg-arena'>
+        <BrowserRouter basename='/gg-arena'>
+            <AuthProvider>
                 <App />
-            </BrowserRouter>
-        </AuthProvider>
+            </AuthProvider>
+        </BrowserRouter>
     </StrictMode>
 )
