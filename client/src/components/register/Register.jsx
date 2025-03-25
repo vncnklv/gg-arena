@@ -77,7 +77,7 @@ function Register() {
                     {error && <p className={styles['error-message']}>{error}</p>}
                     <input type="submit" value='register' className={styles['submit-button']} />
                 </form>
-                <p className={styles['login-redirect']}>Already have an account? Login <Link to='/register'>here</Link>.</p>
+                <p className={styles['login-redirect']}>Already have an account? Login <Link to='/login'>here</Link>.</p>
             </div>
         </div>
     );
