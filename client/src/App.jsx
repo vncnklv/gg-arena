@@ -21,11 +21,11 @@ function App() {
 
             <Routes>
                 <Route index element={<Home />} />
-                <Route path='tournaments' element={<Tournaments />} />
                 <Route path='leaderboard' element={<Leaderboard />} />
                 <Route path='games'>
                     <Route index element={<Games />} />
                     <Route path='add' element={<GamesAdd />} />
+                    <Route path=':id' element={<Tournaments />} />
                 </Route>
                 <Route path='profile' element={<Profile />} />
 
