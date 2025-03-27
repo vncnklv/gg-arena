@@ -1380,6 +1380,7 @@
                 enroledPlayers: [],
                 gameId: "88fbd3d1-36bc-4915-bd4a-879c0a6c994e",
                 _createdOn: 1743025659016,
+                imageUrl: "https://play.toornament.com/media/file/8705708709588025346/logo_large",
                 _id: "90f2f95d-a6c1-48dc-8965-8659af7c1bfb"
             },
             "3fb3d26e-553c-4d47-b2d2-3ecbefff0c22": {

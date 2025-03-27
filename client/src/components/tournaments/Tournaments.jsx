@@ -7,11 +7,12 @@ import SearchBar from "../search-bar/SearchBar";
 import StatusMenu from "./status-menu/StatusMenu";
 
 import styles from './Tournaments.module.css';
+import TournamentView from "./tournament-view/TournamentView";
 
 function Tournaments() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { id } = useParams();
-    const [status, setStatus] = useState('upcoming'); 
+    const [status, setStatus] = useState('upcoming');
     const [tournaments] = useTournaments(id, status, searchParams.get('search'));
 
     const statusUpdateHandler = (newStatus) => {
@@ -21,20 +22,23 @@ function Tournaments() {
     const updateSeachParams = (newSearchTerm) => {
         const params = new URLSearchParams();
 
-        if(newSearchTerm)
-        {
+        if (newSearchTerm) {
             params.set('search', newSearchTerm);
         }
-        
+
         setSearchParams(params);
     }
 
     return (
         <div className="container">
             <div className={styles.submenu}>
-                <StatusMenu status={status} updateStatus={statusUpdateHandler}/>
-                <SearchBar onSubmit={updateSeachParams} initialValue={searchParams.get('search') ?? ''}/>
+                <StatusMenu status={status} updateStatus={statusUpdateHandler} />
+                <SearchBar onSubmit={updateSeachParams} initialValue={searchParams.get('search') ?? ''} />
             </div>
+
+            <section className={styles["tournaments-list"]}>
+                {tournaments.map(t => <TournamentView key={t._id} {...t} status={status} />)}
+            </section>
         </div>
     );
 }
