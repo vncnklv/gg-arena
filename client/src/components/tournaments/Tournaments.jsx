@@ -18,11 +18,22 @@ function Tournaments() {
         setStatus(newStatus);
     }
 
+    const updateSeachParams = (newSearchTerm) => {
+        const params = new URLSearchParams();
+
+        if(newSearchTerm)
+        {
+            params.set('search', newSearchTerm);
+        }
+        
+        setSearchParams(params);
+    }
+
     return (
         <div className="container">
             <div className={styles.submenu}>
                 <StatusMenu status={status} updateStatus={statusUpdateHandler}/>
-                <SearchBar />
+                <SearchBar onSubmit={updateSeachParams} initialValue={searchParams.get('search') ?? ''}/>
             </div>
         </div>
     );
