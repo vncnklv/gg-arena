@@ -1,0 +1,28 @@
+.status-menu { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(0, 125, 255, 0.2);
+    background-color: rgb(0, 125, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 0 1em;
+    gap: 0.5em;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #F8F9FA;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + .toggle-button {
+    background-color: #007bff;
+}

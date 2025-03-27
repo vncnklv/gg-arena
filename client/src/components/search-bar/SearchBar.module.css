@@ -4,9 +4,9 @@
     border-radius: 3px;
     overflow: hidden;
     padding: 1em;
-    margin-bottom: 1em;
     display: flex;
-    gap: 1em
+    gap: 1em;
+    flex-grow: 1;
 }
 
 .search-form {
@@ -16,7 +16,7 @@
 }
 
 .search-bar {
-    flex: 1;
+    flex-grow: 5;
     padding: 0.3em;
 }
 
@@ -26,13 +26,16 @@ input[type="submit"].search-btn {
 
 input[type="submit"].search-btn,
 .add-btn {
-
     text-align: center;
-    flex-basis: 10em;
+    flex-basis: 3em;
     background-color: #007BFF;
     border-radius: 3px;
     margin: auto 0;
     padding: 0.7em 0;
+}
+
+input[type="submit"].search-btn {
+    flex-grow: 1;
 }
 
 input[type="submit"].search-btn:hover {
