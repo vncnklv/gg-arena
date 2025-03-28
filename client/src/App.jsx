@@ -1,5 +1,5 @@
 import Header from './components/header/Header'
-import { Routes, Route } from 'react-router'
+import { Routes, Route, Navigate } from 'react-router'
 
 import Tournaments from './components/tournaments/Tournaments'
 import Leaderboard from './components/leaderboard/Leaderboard'
@@ -14,8 +14,10 @@ import ProtectedRoute from './components/protected-route/ProtectedRoute'
 import GamesAdd from './components/games-add/GamesAdd'
 import TournamentAdd from './components/tournament-add/TournamentAdd'
 import TournamentDetails from './components/tournament-details/TournamentDetails'
+import TournamentDetailsContent from './components/tournament-details/tournament-details-content/TournamentDetailsContent'
 
 import './App.css'
+import TournamentParticipants from './components/tournament-details/tournament-details-content/tournament-participants/TournamentParticipants'
 
 function App() {
     return (
@@ -38,7 +40,11 @@ function App() {
                     </Route>
                 </Route>
                 <Route path='profile' element={<Profile />} />
-                <Route path='tournament/:id' element={<TournamentDetails />} />
+                <Route path='tournament/:id' element={<TournamentDetails />} >
+                    <Route index element={<Navigate replace to='details' />} />
+                    <Route path='details' element={<TournamentDetailsContent />} />
+                    <Route path='participants' element={<TournamentParticipants />} />
+                </Route>
 
                 <Route path='login' element={<Login />} />
                 <Route path='register' element={<Register />} />

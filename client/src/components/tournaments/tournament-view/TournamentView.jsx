@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { formatDateFromTimestamp } from '../../../utils/dateFormatter';
-import ImagePlaceholder from '../image-placeholder/ImagePlaceholder';
+import ImagePlaceholder from '../../image-placeholder/ImagePlaceholder';
 import styles from './TournamentView.module.css';
 
 function TournamentView({ _id, name, platform, startDate, status, maxPlayers, imageUrl }) {
