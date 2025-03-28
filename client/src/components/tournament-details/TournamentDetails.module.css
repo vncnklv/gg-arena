@@ -1,0 +1,50 @@
+.tournament-details-wrapper {
+    width: 980px;
+}
+
+.tournament-details-header {
+    display: grid;
+    grid-template-columns: 150px 2fr 1fr;
+    align-items: center;
+    gap: 0.5em;
+    text-overflow: ellipsis;
+}
+
+.torunament-logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.3em;
+}
+
+.tournament-status {
+    margin-top: 0.5em;
+}
+
+.tournament-date {
+    opacity: 80%;
+}
+
+.torunament-logo-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.tournament-main-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+}
+
+.tournament-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.tournament-actions > button {
+    background-color: #007BFF;
+    border-radius: 3px;
+    padding: 0.7em 1em;
+}

@@ -13,6 +13,7 @@ import Footer from './components/footer/Footer'
 import ProtectedRoute from './components/protected-route/ProtectedRoute'
 import GamesAdd from './components/games-add/GamesAdd'
 import TournamentAdd from './components/tournament-add/TournamentAdd'
+import TournamentDetails from './components/tournament-details/TournamentDetails'
 
 import './App.css'
 
@@ -31,12 +32,13 @@ function App() {
                     <Route element={<ProtectedRoute redirectPath='/games' />}>
                         <Route path=':id/add' element={<TournamentAdd />} />
                     </Route>
-                    
+
                     <Route element={<ProtectedRoute redirectPath='/games' />}>
                         <Route path='add' element={<GamesAdd />} />
                     </Route>
                 </Route>
                 <Route path='profile' element={<Profile />} />
+                <Route path='tournament/:id' element={<TournamentDetails />} />
 
                 <Route path='login' element={<Login />} />
                 <Route path='register' element={<Register />} />
