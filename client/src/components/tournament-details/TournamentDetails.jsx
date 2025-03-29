@@ -1,14 +1,44 @@
-import { Link, NavLink, Outlet, useParams } from 'react-router';
+import { NavLink, Outlet, useParams } from 'react-router';
 import useTournament from '../../api/useTournament';
 import styles from './TournamentDetails.module.css'
 import { formatDateFromTimestamp } from '../../utils/dateFormatter';
 import { getStatusFromTimestamps } from '../../utils/common';
 import ImagePlaceholder from '../image-placeholder/ImagePlaceholder';
-import TournamentDetailsContent from './tournament-details-content/TournamentDetailsContent';
+import useMutate from '../../hooks/useMutate';
+import useParticipants from '../../api/useParticipants';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../providers/UserProvider';
 
 function TournamentDetails() {
     const { id } = useParams();
-    const [data, isLoading, error] = useTournament(id);
+    const [data] = useTournament(id);
+    const [participants, participantsIsLoading, participantsError, participantsRefetch] = useParticipants(id);
+    const [join] = useMutate(`/data/participants`, 'POST');
+    const [joinRecord, setJoinRecord] = useState(false);
+    const [leave, leaveData, leaveIsLoading, leaveError, updateLeavePath] = useMutate('', 'DELETE');
+    const { user, isAuth } = useAuth();
+
+    const status = getStatusFromTimestamps(data.startDate, data.endDate);
+    const userCanJoin = isAuth && status == 'pending' && user._id != data._ownerId && participants.length < data.maxPlayers;
+
+    useEffect(() => {
+        const record = participants.find(p => p._ownerId == user?._id);
+        setJoinRecord(record);
+        updateLeavePath(`/data/participants/${record?._id}`);
+    }, [participants, user]);
+
+    const joinHandler = async () => {
+        const _ = await join({
+            tournamentId: id,
+        });
+        participantsRefetch();
+    };
+
+    const leaveHandler = async () => {
+        await leave();
+        participantsRefetch();
+    }
+
     return (
         <div className="container">
             <section className={styles['tournament-details-wrapper']}>
@@ -25,8 +55,8 @@ function TournamentDetails() {
                         <p className={styles['tournament-status']}>{getStatusFromTimestamps(data.startDate, data.endDate)}</p>
                     </div>
                     <div className={styles['tournament-actions']}>
-                        {/* TODO: Make dynamic depending on the status */}
-                        <button>Enroll</button>
+                        {joinRecord && <button onClick={leaveHandler}>Leave</button>}
+                        {userCanJoin && !joinRecord && <button onClick={joinHandler}>Join</button>}
                     </div>
                 </header>
 
@@ -49,7 +79,7 @@ function TournamentDetails() {
                     </ul>
                 </section>
 
-                <Outlet context={{ data }} />
+                <Outlet context={{ data, participants, participantsRefetch }} />
             </section>
         </div>
     );

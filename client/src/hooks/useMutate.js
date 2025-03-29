@@ -5,13 +5,14 @@ export default function useMutate(path, method, options = {}) {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [_path, setPath] = useState(path);
 
     const mutate = async (body = null) => {
         setIsLoading(true);
         setError(null);
 
         try {
-            const json = await makeRequest(path, options, method, body);
+            const json = await makeRequest(_path, options, method, body);
             setError(null);
             setData(json);
             return json;
@@ -23,5 +24,9 @@ export default function useMutate(path, method, options = {}) {
         }
     };
 
-    return [mutate, data, isLoading, error];
+    const updatePath = (newPath) => {
+        setPath(newPath);
+    }
+
+    return [mutate, data, isLoading, error, updatePath];
 }
