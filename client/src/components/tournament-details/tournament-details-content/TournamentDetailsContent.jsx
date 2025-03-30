@@ -14,6 +14,7 @@ function TournamentDetailsContent() {
     const { data } = useOutletContext();
     const [comments, commentsAreLoading, commentsError, commentsRefetch, commentsClear, commentsUpdate] = useComments(id);
     const [addComment] = useMutate('/data/comments', 'POST');
+
     const { isAuth, user } = useAuth();
 
     const addCommentHandler = async (comment) => {
@@ -23,6 +24,18 @@ function TournamentDetailsContent() {
         });
 
         commentsUpdate(prevComments => [{ ...newComment, user }, ...prevComments]);
+    }
+
+    const deleteCommentHandler = (commentId) => {
+        commentsUpdate(oldComments => oldComments.filter(comment => comment._id != commentId));
+    }
+
+    const editCommentHandler = (updatedComment) => {
+        commentsUpdate(prev => {
+            const updatedCommentIndex = prev.findIndex(comment => comment._id == updatedComment._id);
+            prev[updatedCommentIndex].text = updatedComment.text;
+            return [...prev];
+        });
     }
 
     return (
@@ -63,7 +76,12 @@ function TournamentDetailsContent() {
             <aside className={styles['tournament-comments']}>
                 <h3 className={styles['section-title']}>Comments</h3>
                 {isAuth && <AddCommentForm onSubmit={addCommentHandler} />}
-                {comments.map(comment => <Comment key={comment._id} {...comment} />)}
+                {comments.map(comment => <Comment
+                    key={comment._id}
+                    {...comment}
+                    onDelete={deleteCommentHandler}
+                    onEdit={editCommentHandler}
+                />)}
             </aside>
         </div>
     );
