@@ -6,7 +6,7 @@
     font-family: "Poppins", sans-serif;
 }
 
-header > * {
+.header > * {
     flex-grow: 1;
     flex-basis: 33%;
 }

@@ -7,13 +7,14 @@ import AddCommentForm from '../../add-comment-form/AddCommentForm';
 import useMutate from '../../../hooks/useMutate';
 import useComments from '../../../api/useComments';
 import { useAuth } from '../../../providers/UserProvider';
+import Comment from '../../comment/Comment';
 
 function TournamentDetailsContent() {
     const { id } = useParams();
     const { data } = useOutletContext();
     const [comments, commentsAreLoading, commentsError, commentsRefetch, commentsClear, commentsUpdate] = useComments(id);
     const [addComment] = useMutate('/data/comments', 'POST');
-    const { user } = useAuth();
+    const { isAuth, user } = useAuth();
 
     const addCommentHandler = async (comment) => {
         const newComment = await addComment({
@@ -21,7 +22,7 @@ function TournamentDetailsContent() {
             tournamentId: id
         });
 
-        commentsUpdate(prevComments => [...prevComments, { ...newComment, user }]);
+        commentsUpdate(prevComments => [{ ...newComment, user }, ...prevComments]);
     }
 
     return (
@@ -61,7 +62,8 @@ function TournamentDetailsContent() {
             </section>
             <aside className={styles['tournament-comments']}>
                 <h3 className={styles['section-title']}>Comments</h3>
-                <AddCommentForm onSubmit={addCommentHandler} />
+                {isAuth && <AddCommentForm onSubmit={addCommentHandler} />}
+                {comments.map(comment => <Comment key={comment._id} {...comment} />)}
             </aside>
         </div>
     );

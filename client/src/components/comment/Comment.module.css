@@ -1,0 +1,45 @@
+.comment {
+    padding: 1em 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    border-bottom: 1px solid rgb(0, 125, 255, 0.2);
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+}
+
+.comment-user-info {
+    display: flex;
+    flex-grow: 1;
+    gap: 0.2em;
+    opacity: 60%;
+}
+
+.comment-date {
+    font-size: 0.8em;
+    opacity: 60%;
+}
+
+.comment-user-icon {
+    opacity: 40%;
+}
+
+.comment-content {
+    display: flex;
+    align-items: flex-end;
+}
+
+.comment-text {
+    flex-grow: 1;
+    padding-left: 1.2em;
+    text-wrap: wrap;
+}
+
+.comment-user-actions {
+    display: flex;
+    gap: 0.5em;
+}
