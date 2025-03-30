@@ -18,7 +18,7 @@ export default function useFetch(path, initialState, options = {}) {
             try {
                 const json = await makeRequest(path, { ...options, signal });
                 setData(json);
-            } catch (err) {         
+            } catch (err) {
                 if (!signal.aborted) {
                     setError(err.message);
                 }
@@ -39,5 +39,13 @@ export default function useFetch(path, initialState, options = {}) {
         setData(initialState);
     }
 
-    return [data, isLoading, error, refetch, clear];
+    const manuallyUpdateData = (newData) => {
+        setData(prevData =>
+            typeof newData === 'function'
+                ? newData(prevData)
+                : newData
+        );
+    }
+
+    return [data, isLoading, error, refetch, clear, manuallyUpdateData];
 }

@@ -6,20 +6,22 @@ import { useOutletContext, useParams } from 'react-router';
 import AddCommentForm from '../../add-comment-form/AddCommentForm';
 import useMutate from '../../../hooks/useMutate';
 import useComments from '../../../api/useComments';
+import { useAuth } from '../../../providers/UserProvider';
 
 function TournamentDetailsContent() {
     const { id } = useParams();
     const { data } = useOutletContext();
-    const [comments] = useComments(id);
+    const [comments, commentsAreLoading, commentsError, commentsRefetch, commentsClear, commentsUpdate] = useComments(id);
     const [addComment] = useMutate('/data/comments', 'POST');
+    const { user } = useAuth();
 
     const addCommentHandler = async (comment) => {
         const newComment = await addComment({
             text: comment,
             tournamentId: id
         });
-        // TODO: add new comment to all comments state.
-        // console.log(newComment);
+
+        commentsUpdate(prevComments => [...prevComments, { ...newComment, user }]);
     }
 
     return (
