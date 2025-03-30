@@ -2,10 +2,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLayerGroup, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './TournamentDetailsContent.module.css'
-import { useOutletContext } from 'react-router';
+import { useOutletContext, useParams } from 'react-router';
+import AddCommentForm from '../../add-comment-form/AddCommentForm';
+import useMutate from '../../../hooks/useMutate';
+import useComments from '../../../api/useComments';
 
 function TournamentDetailsContent() {
+    const { id } = useParams();
     const { data } = useOutletContext();
+    const [comments] = useComments(id);
+    const [addComment] = useMutate('/data/comments', 'POST');
+
+    const addCommentHandler = async (comment) => {
+        const newComment = await addComment({
+            text: comment,
+            tournamentId: id
+        });
+        // TODO: add new comment to all comments state.
+        // console.log(newComment);
+    }
 
     return (
         <div className={styles['tournament-content']}>
@@ -44,6 +59,7 @@ function TournamentDetailsContent() {
             </section>
             <aside className={styles['tournament-comments']}>
                 <h3 className={styles['section-title']}>Comments</h3>
+                <AddCommentForm onSubmit={addCommentHandler} />
             </aside>
         </div>
     );

@@ -16,7 +16,7 @@ function TournamentParticipants() {
     return (
         <div className={styles['participants-wrapper']}>
             {participants.map(p => (
-                <div className={styles['participant']}>
+                <div key={p._id} className={styles['participant']}>
                     <div className={styles['icon']}>
                         <FontAwesomeIcon icon={faUser} />
                     </div>
