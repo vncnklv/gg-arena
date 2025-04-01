@@ -52,9 +52,7 @@ function App() {
                     <Route path='register' element={<Register />} />
                 </Route>
 
-                <Route element={<ProtectedRoute redirectPath='/login'/>}>
-                    <Route path='logout' element={<Logout />} />
-                </Route>
+                <Route path='logout' element={<Logout />} />
 
             </Routes>
 
