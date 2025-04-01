@@ -18,6 +18,7 @@ import TournamentDetailsContent from './components/tournament-details/tournament
 
 import './App.css'
 import TournamentParticipants from './components/tournament-details/tournament-details-content/tournament-participants/TournamentParticipants'
+import GuestRoute from './components/guest-route/GuestRoute'
 
 function App() {
     return (
@@ -46,9 +47,14 @@ function App() {
                     <Route path='participants' element={<TournamentParticipants />} />
                 </Route>
 
-                <Route path='login' element={<Login />} />
-                <Route path='register' element={<Register />} />
-                <Route path='logout' element={<Logout />} />
+                <Route element={<GuestRoute />}>
+                    <Route path='login' element={<Login />} />
+                    <Route path='register' element={<Register />} />
+                </Route>
+
+                <Route element={<ProtectedRoute redirectPath='/login'/>}>
+                    <Route path='logout' element={<Logout />} />
+                </Route>
 
             </Routes>
 
