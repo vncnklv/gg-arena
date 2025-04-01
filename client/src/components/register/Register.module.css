@@ -1,6 +1,6 @@
 .register-container {
     position: absolute;
-    min-width: 400px;
+    min-width: 700px;
 
     left: 50%;
     top: 50%;
@@ -25,6 +25,7 @@
 .input-set {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .label {
@@ -64,4 +65,17 @@ input[type="submit"].submit-button {
 
 .login-redirect a {
     color: #007BFF;
+}
+
+.label {
+    display: flex;
+    flex-grow: 1;
+    font-size: 0.8em;
+    margin-bottom: 0.3em;
+}
+
+.label .input-error {
+    color: #DC3545;
+    flex-grow: 1;
+    text-align: right;
 }
