@@ -18,8 +18,14 @@
 }
 
 .label {
+    display: flex;
+    justify-content: space-between;
     font-size: 0.8em;
     margin-bottom: 0.3em;
+}
+
+.label .input-error {
+    color: #DC3545;
 }
 
 .text-input {
