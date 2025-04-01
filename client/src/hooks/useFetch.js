@@ -14,6 +14,7 @@ export default function useFetch(path, initialState, options = {}) {
         async function fetchData() {
             setIsLoading(true);
             setError(null);
+            setData(initialState);
 
             try {
                 const json = await makeRequest(path, { ...options, signal });
