@@ -33,8 +33,8 @@ function Register() {
                         {...register('username', {
                             required: "Username is required.",
                             pattern: {
-                                value: /^.{3,}$/,
-                                message: 'Username should be atleast 3 characters long.'
+                                value: /^(?![-_])[a-zA-Z0-9_-]{3,20}(?<![-_])$/,
+                                message: "Invalid username (3-20 chars, no -/_ at start or end)",
                             }
                         })}
                     />
