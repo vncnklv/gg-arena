@@ -11,7 +11,10 @@ function Logout() {
         if (isAuth) {
             logout().then(() => navigate('/'));
         }
-        navigate('/');
+        else
+        {
+            navigate('/');
+        }
     }, []);
 
     return;
