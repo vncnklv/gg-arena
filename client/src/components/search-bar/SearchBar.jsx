@@ -3,7 +3,7 @@ import styles from './SearchBar.module.css';
 
 import { Link } from 'react-router'
 
-function SearchBar({ onSubmit, initialValue }) {
+function SearchBar({ onSubmit, initialValue, renderAddButton = true }) {
     const {isAuth} = useAuth();
 
     const submitHandler = (e) => {
@@ -19,7 +19,7 @@ function SearchBar({ onSubmit, initialValue }) {
                 <input type="text" name="search" className={styles['search-bar']} defaultValue={initialValue} />
                 <input type="submit" value="Search" className={styles['search-btn']} />
             </form>
-            {isAuth && <Link to='add' className={styles['add-btn']}>Add</Link>}
+            {isAuth && renderAddButton && <Link to='add' className={styles['add-btn']}>Add</Link>}
         </div>
     );
 }

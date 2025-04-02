@@ -33,7 +33,7 @@ function Tournaments() {
         <div className="container">
             <div className={styles.submenu}>
                 <StatusMenu status={status} updateStatus={statusUpdateHandler} />
-                <SearchBar onSubmit={updateSeachParams} initialValue={searchParams.get('search') ?? ''} />
+                <SearchBar onSubmit={updateSeachParams} initialValue={searchParams.get('search') ?? ''} renderAddButton={!!id} />
             </div>
 
             <section className={styles["tournaments-list"]}>
