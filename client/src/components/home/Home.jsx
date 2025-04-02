@@ -2,8 +2,10 @@ import { Link } from "react-router";
 import styles from "./Home.module.css";
 import { useAuth } from "../../providers/UserProvider";
 import TournamentMiniView from "../tournament-mini-view/TournamentMiniView";
+import useTournaments from "../../api/useTournaments";
 function Home() {
     const { isAuth } = useAuth();
+    const [featuredTournaments] = useTournaments();
 
     return (
         <div className="container">
@@ -36,9 +38,7 @@ function Home() {
                 <section className={styles.featuredTournaments}>
                     <h2>Featured Tournaments</h2>
                     <div className={styles.tournamentList}>
-                        <TournamentMiniView />
-                        <TournamentMiniView />
-                        <TournamentMiniView />
+                        {featuredTournaments.map(tournament => <TournamentMiniView key={tournament._id} {...tournament} />)}
                     </div>
                 </section>
             </div>
