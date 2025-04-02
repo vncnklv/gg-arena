@@ -67,11 +67,11 @@ function TournamentDetailsContent() {
                         <p>{data.description}</p>
                     </div>
                 )}
-                <div className={styles['tournament-organiser']}>
+                {/* <div className={styles['tournament-organiser']}>
                     <h4>Organiser</h4>
                     <p>name</p>
                     <p>email</p>
-                </div>
+                </div> */}
             </section>
             <aside className={styles['tournament-comments']}>
                 <h3 className={styles['section-title']}>Comments</h3>

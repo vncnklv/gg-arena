@@ -15,9 +15,9 @@ import GamesAdd from './components/games-add/GamesAdd'
 import TournamentAdd from './components/tournament-add/TournamentAdd'
 import TournamentDetails from './components/tournament-details/TournamentDetails'
 import TournamentDetailsContent from './components/tournament-details/tournament-details-content/TournamentDetailsContent'
+import TournamentParticipants from './components/tournament-details/tournament-participants/TournamentParticipants'
 
 import './App.css'
-import TournamentParticipants from './components/tournament-details/tournament-details-content/tournament-participants/TournamentParticipants'
 import GuestRoute from './components/guest-route/GuestRoute'
 
 function App() {

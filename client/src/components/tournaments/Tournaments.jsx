@@ -13,7 +13,7 @@ function Tournaments() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { id } = useParams();
     const [status, setStatus] = useState('upcoming');
-    const [tournaments] = useTournaments(id, status, searchParams.get('search'));
+    const [tournaments] = useTournaments(6, 1, id, status, searchParams.get('search'));
 
     const statusUpdateHandler = (newStatus) => {
         setStatus(newStatus);
