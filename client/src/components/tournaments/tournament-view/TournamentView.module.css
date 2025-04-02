@@ -38,8 +38,9 @@
 }
 
 .tournament-status-section {
-    display: grid;
-    place-items: center;
+    display: flex;
+    gap: 0.3em;
+    justify-content: center;
     text-align: center;
     text-transform: capitalize;
     font-size: 0.9em;

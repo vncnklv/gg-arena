@@ -41,6 +41,7 @@ function App() {
                     </Route>
                 </Route>
                 <Route path='profile' element={<Profile />} />
+                <Route path='tournaments' element={<Tournaments />} />
                 <Route path='tournament/:id' element={<TournamentDetails />} >
                     <Route index element={<Navigate replace to='details' />} />
                     <Route path='details' element={<TournamentDetailsContent />} />

@@ -17,7 +17,7 @@ export default function useTournaments(pageSize = 3, page = 1, gameId = null, st
             statusFilter = `startDate > ${Date.now()}`;
         }
 
-        setPath(`/data/tournaments?where=${statusFilter}${searchTerm ? ` AND name LIKE "${searchTerm}"` : ''}${gameId ? ` AND gameId LIKE "${gameId}"` : ''}&offset=${pageSize * (page - 1)}&pageSize=${pageSize}`);
+        setPath(`/data/tournaments?where=${statusFilter}${searchTerm ? ` AND name LIKE "${searchTerm}"` : ''}${gameId ? ` AND gameId LIKE "${gameId}"` : ''}&offset=${pageSize * (page - 1)}&pageSize=${pageSize}&load=game%3DgameId%3Agames`);
     }, [searchTerm, status]);
 
     return [data, isLoading, error];
