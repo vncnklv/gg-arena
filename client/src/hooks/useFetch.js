@@ -28,7 +28,10 @@ export default function useFetch(path, initialState, options = {}) {
             }
         }
 
-        fetchData();
+        if(path)
+        {
+            fetchData();
+        }
         return () => controller.abort('aborted');
     }, [path, fetchTrigger]);
 
