@@ -3,7 +3,7 @@ import useFetch from "../hooks/useFetch";
 
 export default function useGames() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [path, setPath] = useState('/data/games');
+    const [path, setPath] = useState();
     const [data, isLoading, error] = useFetch(path, []);
 
     useEffect(() => {
