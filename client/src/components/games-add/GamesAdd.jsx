@@ -1,62 +1,53 @@
-import { Link, useNavigate } from 'react-router'
-import { useState } from 'react';
+import { useNavigate } from 'react-router'
+import useMutate from '../../hooks/useMutate'
+import { useForm } from 'react-hook-form'
 
 import styles from './GamesAdd.module.css'
-import useMutate from '../../hooks/useMutate';
 
 function GamesAdd() {
-    const [gameData, setGameData] = useState({
-        imageUrl: '',
-        name: ''
-    });
-    const [error, setError] = useState('');
-    const [mutate, _, isLoading] = useMutate('/data/games', 'POST');
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [mutate, _, isLoading, error] = useMutate('/data/games', 'POST');
 
     const navigate = useNavigate();
 
-    const changeHandler = (e) => {
-        setGameData(oldData => {
-            const newData = { ...oldData }
-            newData[e.target.name] = e.target.value
-            return newData;
-        });
-    }
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-
-        if (!gameData.imageUrl && !gameData.name) {
-            setError("All fields are required!");
-            return;
-        }
-        if (!gameData.imageUrl) {
-            setError("Image not provided");
-            return;
-        }
-
-        if (!gameData.name) {
-            setError("Name not provided");
-            return;
-        }
-
-        try {
-            await mutate(gameData);
-            navigate('/games');
-        }
-        catch (err) {
-            setError(err.message);
-        }
+    const submitHandler = async (gameData) => {
+        await mutate(gameData);
+        navigate('/games');
     }
 
     return (
         <div className="container">
             <div className={styles['form-container']}>
-                <form onSubmit={submitHandler} className={styles['form']}>
-                    <label htmlFor="name" className={styles.label}>Name</label>
-                    <input id="name" type="text" name="name" className={styles['text-input']} onChange={changeHandler} value={gameData.name} />
-                    <label htmlFor="imageUrl" className={styles.label}>Image</label>
-                    <input id="imageUrl" type="text" name="imageUrl" className={styles['text-input']} onChange={changeHandler} value={gameData.imageUrl} />
+                <form onSubmit={handleSubmit(submitHandler)} className={styles['form']}>
+
+                    <label htmlFor="name" className={styles.label}>
+                        <span>Name</span>
+                        {errors.name && <span className={styles['input-error']}>{errors.name.message}</span>}
+                    </label>
+                    <input
+                        id="name"
+                        type="text"
+                        className={styles['text-input']}
+                        {...register('name', {
+                            required: "Name is required."
+                        })}
+                    />
+
+                    <label htmlFor="imageUrl" className={styles.label}>
+                        <span>Image</span>
+                        {errors.imageUrl && <span className={styles['input-error']}>{errors.imageUrl.message}</span>}
+                    </label>
+                    <input
+                        id="imageUrl"
+                        type="text"
+                        className={styles['text-input']}
+                        {...register('imageUrl', {
+                            required: "Image is required."
+                        })}
+                    />
+
                     {error && <p className={styles['error-message']}>{error}</p>}
+
                     <input type="submit" value='add' className={styles['submit-button']} disabled={isLoading} />
                 </form>
             </div>
