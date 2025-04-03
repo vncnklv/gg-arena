@@ -7,7 +7,7 @@ import styles from './Login.module.css'
 import useLogin from '../../api/useLogin';
 
 function Login() {
-    const { register, handleSubmit, formState: { errors } , setError, clearErrors} = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [login, loginIsLoading, loginError] = useLogin();
 
@@ -49,8 +49,8 @@ function Login() {
                     />
 
                     {loginError && <p className={styles['error-message']}>{loginError}</p>}
-                    
-                    <input type="submit" value='login' className={styles['submit-button']} disabled={loginIsLoading} onClick={() => {clearErrors()}}/>
+
+                    <input type="submit" value='login' className={styles['submit-button']} disabled={loginIsLoading} />
                 </form>
                 <p className={styles['register-redirect']}>Do not have an account? Create one <Link to='/register'>here</Link>.</p>
             </div>

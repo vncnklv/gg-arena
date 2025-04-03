@@ -15,8 +15,6 @@ function Register() {
         navigate("/");
     }
 
-    const userData = {};
-    const changeHandler = () => { };
     return (
         <div className="container">
             <div className={styles['register-container']}>

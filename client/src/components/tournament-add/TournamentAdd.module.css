@@ -68,5 +68,18 @@ input[type="submit"].submit-button:disabled {
 .input-set {
     display: flex;
     flex-direction: column;
+    flex: 1;
+}
+
+.label {
+    display: flex;
     flex-grow: 1;
+    font-size: 0.8em;
+    margin-bottom: 0.3em;
+}
+
+.label .input-error {
+    color: #DC3545;
+    flex-grow: 1;
+    text-align: right;
 }
