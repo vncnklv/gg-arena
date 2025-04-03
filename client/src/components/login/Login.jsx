@@ -12,8 +12,10 @@ function Login() {
     const [login, loginIsLoading, loginError] = useLogin();
 
     const submitHandler = async (userData) => {
-        await login(userData);
-        navigate("/");
+        try {
+            await login(userData);
+            navigate("/");
+        } catch { }
     }
 
     return (

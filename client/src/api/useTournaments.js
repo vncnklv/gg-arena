@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 
 export default function useTournaments(pageSize = 3, page = 1, gameId = null, status = 'upcoming', searchTerm = '') {
-    const [path, setPath] = useState('');
+    const [path, setPath] = useState();
     const [data, isLoading, error] = useFetch(path, []);
 
     useEffect(() => {
