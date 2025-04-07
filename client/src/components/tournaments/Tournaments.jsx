@@ -12,6 +12,7 @@ import useGame from "../../api/useGame";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGamepad, faTrash, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import useMutate from "../../hooks/useMutate";
+import { useAuth } from "../../providers/UserProvider";
 
 function Tournaments() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -21,6 +22,7 @@ function Tournaments() {
     const [game] = useGame(id);
     const [deleteGame] = useMutate(`/data/games/${id}`, "DELETE");
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const deleteHandler = async () => {
         const confirmDialogText = `Are tou sure you want to delete ${game.name}`;
@@ -52,7 +54,7 @@ function Tournaments() {
                     <FontAwesomeIcon icon={faGamepad} className={styles['game-icon']} />
                     <h2>{game.name}</h2>
                 </div>
-                <div className={styles['game-actions']}>
+                {user && game._ownerId == user._id && <div className={styles['game-actions']}>
                     <Link className={`${styles['game-icon']}`} to='edit'>
                         <FontAwesomeIcon icon={faUserEdit} />
                     </Link>
@@ -60,6 +62,7 @@ function Tournaments() {
                         <FontAwesomeIcon icon={faTrash} />
                     </button>
                 </div>
+                }
             </div>
             }
             <div className={styles.submenu}>
