@@ -1,12 +1,19 @@
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import useMutate from '../../hooks/useMutate'
 import { useForm } from 'react-hook-form'
 
-import styles from './GamesAdd.module.css'
+import styles from './GameMutate.module.css'
 
-function GamesAdd() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [mutate, _, isLoading, error] = useMutate('/data/games', 'POST');
+function GameMutate() {
+    const { id } = useParams();
+    const { state } = useLocation();
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            name: state?.game.name ?? '',
+            imageUrl: state?.game.imageUrl ?? '',
+        }
+    });
+    const [mutate, _, isLoading, error] = useMutate(`/data/games${id ? `/${id}` : ''}`, id ? 'PATCH' : 'POST');
 
     const navigate = useNavigate();
 
@@ -14,6 +21,7 @@ function GamesAdd() {
         await mutate(gameData);
         navigate('/games');
     }
+    console.log(state);
 
     return (
         <div className="container">
@@ -48,11 +56,11 @@ function GamesAdd() {
 
                     {error && <p className={styles['error-message']}>{error}</p>}
 
-                    <input type="submit" value='add' className={styles['submit-button']} disabled={isLoading} />
+                    <input type="submit" value={id ? 'edit' : 'add'} className={styles['submit-button']} disabled={isLoading} />
                 </form>
             </div>
         </div>
     );
 }
 
-export default GamesAdd;
+export default GameMutate;

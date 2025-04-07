@@ -11,7 +11,7 @@ import Profile from './components/profile/Profile'
 import Logout from './components/logout/Logout'
 import Footer from './components/footer/Footer'
 import ProtectedRoute from './components/protected-route/ProtectedRoute'
-import GamesAdd from './components/games-add/GamesAdd'
+import GamesAdd from './components/game-mutate/GameMutate'
 import TournamentAdd from './components/tournament-add/TournamentAdd'
 import TournamentDetails from './components/tournament-details/TournamentDetails'
 import TournamentDetailsContent from './components/tournament-details/tournament-details-content/TournamentDetailsContent'
@@ -38,6 +38,7 @@ function App() {
 
                     <Route element={<ProtectedRoute redirectPath='/games' />}>
                         <Route path='add' element={<GamesAdd />} />
+                        <Route path=':id/edit' element={<GamesAdd />} />
                     </Route>
                 </Route>
                 <Route path='profile' element={<Profile />} />

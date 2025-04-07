@@ -55,7 +55,7 @@ function Tournaments() {
                     <h2>{game.name}</h2>
                 </div>
                 {user && game._ownerId == user._id && <div className={styles['game-actions']}>
-                    <Link className={`${styles['game-icon']}`} to='edit'>
+                    <Link className={`${styles['game-icon']}`} to='edit' state={{ game }}>
                         <FontAwesomeIcon icon={faUserEdit} />
                     </Link>
                     <button className={`${styles['game-icon']}`} onClick={deleteHandler} >
