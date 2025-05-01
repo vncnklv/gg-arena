@@ -4,21 +4,29 @@ import useFetch from "../hooks/useFetch";
 export default function useTournaments(pageSize = 3, page = 1, gameId = null, status = 'upcoming', searchTerm = '') {
     const [path, setPath] = useState();
     const [data, isLoading, error] = useFetch(path, []);
+    const [countPath, setCountPath] = useState();
+    const [count] = useFetch(countPath, 0);
+    const [statusFilter, setStatusFilter] = useState();
 
     useEffect(() => {
-        let statusFilter;
         if (status == 'ongoing') {
-            statusFilter = `startDate < ${Date.now()} AND endDate > ${Date.now()}`;
+            setStatusFilter(`startDate < ${Date.now()} AND endDate > ${Date.now()}`);
         }
         else if (status == 'completed') {
-            statusFilter = `endDate < ${Date.now()}`;
+            setStatusFilter(`endDate < ${Date.now()}`);
         }
         else {
-            statusFilter = `startDate > ${Date.now()}`;
+            setStatusFilter(`startDate > ${Date.now()}`);
         }
+    }, [status]);
 
+    useEffect(() => {
         setPath(`/data/tournaments?where=${statusFilter}${searchTerm ? ` AND name LIKE "${searchTerm}"` : ''}${gameId ? ` AND gameId LIKE "${gameId}"` : ''}&offset=${pageSize * (page - 1)}&pageSize=${pageSize}&load=game%3DgameId%3Agames`);
-    }, [searchTerm, status]);
+    }, [statusFilter, page, searchTerm, gameId]);
 
-    return [data, isLoading, error];
+    useEffect(() => {
+        setCountPath(`/data/tournaments?where=${statusFilter}${searchTerm ? ` AND name LIKE "${searchTerm}"` : ''}${gameId ? ` AND gameId LIKE "${gameId}"` : ''}&count=1`)
+    }, [statusFilter, searchTerm, gameId]);
+
+    return [data, isLoading, error, count];
 }

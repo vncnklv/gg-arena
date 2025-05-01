@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams, useSearchParams } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import useTournaments from "../../api/useTournaments";
 
@@ -13,16 +13,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGamepad, faTrash, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import useMutate from "../../hooks/useMutate";
 import { useAuth } from "../../providers/UserProvider";
+import Paginator from "../paginator/Paginator";
 
 function Tournaments() {
     const [searchParams, setSearchParams] = useSearchParams();
+
     const { id } = useParams();
     const [status, setStatus] = useState('upcoming');
-    const [tournaments] = useTournaments(6, 1, id, status, searchParams.get('search'));
+    const pageSize = 6;
+    const [page, setPage] = useState(searchParams.get('page') != null ? Number(searchParams.get('page')) : 1);
+    const [tournaments, isLoading, error, count] = useTournaments(pageSize, page, id, status, searchParams.get('search'));
+    const maxPage = Math.ceil(count / pageSize);    
+    
     const [game] = useGame(id);
     const [deleteGame] = useMutate(`/data/games/${id}`, "DELETE");
+
     const navigate = useNavigate();
+
     const { user } = useAuth();
+
+    const goToNextPage = () => {
+        setPage(prev => prev == maxPage ? prev : ++prev);
+    }
+
+    const goToPrevPage = () => {
+        setPage(prev => prev == 1 ? prev : --prev);
+    }
 
     const deleteHandler = async () => {
         const confirmDialogText = `Are tou sure you want to delete ${game.name}`;
@@ -42,6 +58,7 @@ function Tournaments() {
 
         if (newSearchTerm) {
             params.set('search', newSearchTerm);
+            setPage(1);
         }
 
         setSearchParams(params);
@@ -73,6 +90,13 @@ function Tournaments() {
             <section className={styles["tournaments-list"]}>
                 {tournaments.map(t => <TournamentView key={t._id} {...t} status={status} />)}
             </section>
+
+            {count != 0 && <Paginator
+                currentPage={page}
+                goToNextPage={goToNextPage}
+                goToPrevPage={goToPrevPage}
+                maxPage={maxPage}
+            />}
         </div>
     );
 }
